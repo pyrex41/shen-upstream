@@ -1,0 +1,227 @@
+=========================
+Step 0 [1]
+
+?- [all want 
+ [all have 
+  [
+   [
+    [< have want] = true] => 
+   [
+    [simp want have] = want]]]]
+
+ > (fn mathind)=========================
+Step 1 [2]
+
+?- [all have 
+ [
+  [
+   [< have 0] = true] => 
+  [
+   [simp 0 have] = 0]]]
+
+ > (fn mathind)=========================
+Step 2 [3]
+
+?- [
+ [
+  [< 0 0] = true] => 
+ [
+  [simp 0 0] = 0]]
+
+ > (fn =>r)=========================
+Step 3 [3]
+
+?- [
+ [simp 0 0] = 0]
+
+1. [
+ [< 0 0] = true]
+ > (fn because)=========================
+Step 4 [2]
+
+?- [all have 
+ [
+  [
+   [~ 
+    [have = 0]] & 
+   [
+    [
+     [< have 0] = true] => 
+    [
+     [simp 0 have] = 0]]] => 
+  [
+   [
+    [< 
+     [succ have] 0] = true] => 
+   [
+    [simp 0 
+     [succ have]] = 0]]]]
+
+ > (allr tm0)=========================
+Step 5 [2]
+
+?- [
+ [
+  [~ 
+   [tm0 = 0]] & 
+  [
+   [
+    [< tm0 0] = true] => 
+   [
+    [simp 0 tm0] = 0]]] => 
+ [
+  [
+   [< 
+    [succ tm0] 0] = true] => 
+  [
+   [simp 0 
+    [succ tm0]] = 0]]]
+
+ > (fn =>r)=========================
+Step 6 [2]
+
+?- [
+ [
+  [< 
+   [succ tm0] 0] = true] => 
+ [
+  [simp 0 
+   [succ tm0]] = 0]]
+
+1. [
+ [~ 
+  [tm0 = 0]] & 
+ [
+  [
+   [< tm0 0] = true] => 
+  [
+   [simp 0 tm0] = 0]]]
+ > (fn =>r)=========================
+Step 7 [2]
+
+?- [
+ [simp 0 
+  [succ tm0]] = 0]
+
+1. [
+ [< 
+  [succ tm0] 0] = true]
+2. [
+ [~ 
+  [tm0 = 0]] & 
+ [
+  [
+   [< tm0 0] = true] => 
+  [
+   [simp 0 tm0] = 0]]]
+ > (fn because)=========================
+Step 8 [1]
+
+?- [all want 
+ [
+  [
+   [~ 
+    [want = 0]] & 
+   [all have 
+    [
+     [
+      [< have want] = true] => 
+     [
+      [simp want have] = want]]]] => 
+  [all have 
+   [
+    [
+     [< have 
+      [succ want]] = true] => 
+    [
+     [simp 
+      [succ want] have] = 
+     [succ want]]]]]]
+
+ > (allr tm1)=========================
+Step 9 [1]
+
+?- [
+ [
+  [~ 
+   [tm1 = 0]] & 
+  [all have 
+   [
+    [
+     [< have tm1] = true] => 
+    [
+     [simp tm1 have] = tm1]]]] => 
+ [all have 
+  [
+   [
+    [< have 
+     [succ tm1]] = true] => 
+   [
+    [simp 
+     [succ tm1] have] = 
+    [succ tm1]]]]]
+
+ > (fn =>r)=========================
+Step 10 [1]
+
+?- [all have 
+ [
+  [
+   [< have 
+    [succ tm1]] = true] => 
+  [
+   [simp 
+    [succ tm1] have] = 
+   [succ tm1]]]]
+
+1. [
+ [~ 
+  [tm1 = 0]] & 
+ [all have 
+  [
+   [
+    [< have tm1] = true] => 
+   [
+    [simp tm1 have] = tm1]]]]
+ > (fn &l)=========================
+Step 11 [1]
+
+?- [all have 
+ [
+  [
+   [< have 
+    [succ tm1]] = true] => 
+  [
+   [simp 
+    [succ tm1] have] = 
+   [succ tm1]]]]
+
+1. [~ 
+ [tm1 = 0]]
+2. [all have 
+ [
+  [
+   [< have tm1] = true] => 
+  [
+   [simp tm1 have] = tm1]]]
+ > (allr tm2)=========================
+Step 12 [1]
+
+?- [
+ [
+  [< tm2 
+   [succ tm1]] = true] => 
+ [
+  [simp 
+   [succ tm1] tm2] = 
+  [succ tm1]]]
+
+1. [~ 
+ [tm1 = 0]]
+2. [all have 
+ [
+  [
+   [< have tm1] = true] => 
+  [
+   [simp tm1 have] = tm1]]]
+ > (fn =>r)

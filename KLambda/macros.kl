@@ -1,0 +1,65 @@
+(defun macroexpand (V5792) (let W5793 (map (lambda Z5794 (tl Z5794)) (value *macros*)) (shen.macroexpand-h V5792 W5793 W5793)))
+
+(defun shen.macroexpand-h (V5803 V5804 V5805) (if (= () V5804) V5803 (if (cons? V5804) (let W5806 (shen.walk (hd V5804) V5803) (if (= V5803 W5806) (shen.macroexpand-h V5803 (tl V5804) V5805) (shen.macroexpand-h W5806 V5805 V5805))) (simple-error "implementation error in shen.macroexpand-h"))))
+
+(defun shen.walk (V5807 V5808) (if (cons? V5808) (V5807 (map (lambda Z5809 (shen.walk V5807 Z5809)) V5808)) (V5807 V5808)))
+
+(defun shen.macros (V5810) (let GoTo5811 (freeze V5810) (if (cons? V5810) (let Select5816 (hd V5810) (let Select5817 (tl V5810) (if (and (= defmacro Select5816) (cons? Select5817)) (shen.process-def (hd Select5817) (tl Select5817)) (if (= defcc Select5816) (shen.yacc->shen Select5817) (if (and (= u! Select5816) (and (cons? Select5817) (= () (tl Select5817)))) (cons protect (cons (shen.make-uppercase (hd Select5817)) ())) (if (and (= error Select5816) (cons? Select5817)) (cons simple-error (cons (shen.mkstr (hd Select5817) (tl Select5817)) ())) (if (and (= output Select5816) (cons? Select5817)) (cons pr (cons (shen.mkstr (hd Select5817) (tl Select5817)) (cons (cons stoutput ()) ()))) (if (and (= pr Select5816) (and (cons? Select5817) (= () (tl Select5817)))) (cons pr (cons (hd Select5817) (cons (cons stoutput ()) ()))) (if (and (= make-string Select5816) (cons? Select5817)) (shen.mkstr (hd Select5817) (tl Select5817)) (if (and (= lineread Select5816) (= () Select5817)) (cons lineread (cons (cons stinput ()) ())) (if (and (= input Select5816) (= () Select5817)) (cons input (cons (cons stinput ()) ())) (if (and (= read Select5816) (= () Select5817)) (cons read (cons (cons stinput ()) ())) (if (and (= input+ Select5816) (cons? Select5817)) (shen.process-input+ V5810) (if (and (= read-byte Select5816) (= () Select5817)) (shen.process-read-byte) (if (= prolog? Select5816) (shen.call-prolog Select5817) (if (and (= defprolog Select5816) (cons? Select5817)) (shen.compile-prolog (hd Select5817) (tl Select5817)) (if (and (= datatype Select5816) (cons? Select5817)) (shen.process-datatype (hd Select5817) (tl Select5817)) (if (= @s Select5816) (shen.process-@s V5810) (if (= synonyms Select5816) (shen.process-synonyms Select5817) (if (and (= nl Select5816) (= () Select5817)) (cons nl (cons 1 ())) (if (= let Select5816) (shen.process-let V5810) (if (= /. Select5816) (shen.process-lambda V5810) (if (= cases Select5816) (shen.process-cases V5810) (if (and (= time Select5816) (and (cons? Select5817) (= () (tl Select5817)))) (shen.process-time (hd Select5817)) (if (and (= put Select5816) (and (cons? Select5817) (and (cons? (tl Select5817)) (and (cons? (tl (tl Select5817))) (= () (tl (tl (tl Select5817)))))))) (cons put (cons (hd Select5817) (cons (hd (tl Select5817)) (cons (hd (tl (tl Select5817))) (cons (cons value (cons *property-vector* ())) ()))))) (if (and (= get Select5816) (and (cons? Select5817) (and (cons? (tl Select5817)) (= () (tl (tl Select5817)))))) (cons get (cons (hd Select5817) (cons (hd (tl Select5817)) (cons (cons value (cons *property-vector* ())) ())))) (if (and (= unput Select5816) (and (cons? Select5817) (and (cons? (tl Select5817)) (= () (tl (tl Select5817)))))) (cons unput (cons (hd Select5817) (cons (hd (tl Select5817)) (cons (cons value (cons *property-vector* ())) ())))) (if (and (= shen.@c Select5816) (and (cons? Select5817) (= () (tl Select5817)))) (shen.rcons_form (hd Select5817)) (let GoTo5812 (freeze (if (and (cons? Select5817) (and (cons? (tl Select5817)) (and (cons? (tl (tl Select5817))) (element? Select5816 (cons @p (cons @v (cons append (cons and (cons or (cons + (cons * (cons do ())))))))))))) (cons Select5816 (cons (hd Select5817) (cons (shen.process-assoc (cons Select5816 (tl Select5817))) ()))) (thaw GoTo5811))) (if (= shen.@ch Select5816) (if (cons? Select5817) (let Select5814 (hd Select5817) (let Select5815 (tl Select5817) (if (and (cons? Select5814) (and (cons? (tl Select5814)) (and (cons? (tl (tl Select5814))) (and (= () (tl (tl (tl Select5814)))) (and (= () Select5815) (= (hd (tl Select5814)) (intern ":"))))))) (shen.cons-form-respect-modes (cons - (cons (cons (hd Select5814) (cons (hd (tl Select5814)) (cons (cons + (tl (tl Select5814))) ()))) ()))) (if (= () Select5815) (shen.cons-form-respect-modes Select5814) (thaw GoTo5812))))) (thaw GoTo5812)) (thaw GoTo5812))))))))))))))))))))))))))))))) (thaw GoTo5811))))
+
+(defun shen.process-input+ (V5818) (let GoTo5819 (freeze (simple-error "partial function shen.process-input+")) (if (cons? V5818) (let Select5824 (tl V5818) (if (= input+ (hd V5818)) (if (cons? Select5824) (let Select5822 (hd Select5824) (let Select5823 (tl Select5824) (if (= () Select5823) (cons shen.input-h+ (cons (shen.rcons_form Select5822) (cons (cons stinput ()) ()))) (if (and (cons? Select5823) (= () (tl Select5823))) (cons shen.input-h+ (cons (shen.rcons_form Select5822) Select5823)) (thaw GoTo5819))))) (thaw GoTo5819)) (thaw GoTo5819))) (thaw GoTo5819))))
+
+(defun shen.cons-form-respect-modes (V5825) (let GoTo5826 (freeze V5825) (if (cons? V5825) (let Select5827 (hd V5825) (let Select5828 (tl V5825) (if (and (= + Select5827) (and (cons? Select5828) (= () (tl Select5828)))) (cons + (cons (shen.cons-form-respect-modes (hd Select5828)) ())) (if (and (= - Select5827) (and (cons? Select5828) (= () (tl Select5828)))) (cons - (cons (shen.cons-form-respect-modes (hd Select5828)) ())) (cons cons (cons (shen.cons-form-respect-modes Select5827) (cons (shen.cons-form-respect-modes Select5828) ()))))))) (thaw GoTo5826))))
+
+(defun shen.process-def (V5829 V5830) (let W5831 (cons X (cons -> (cons X ()))) (let W5832 (eval (cons define (cons V5829 (append V5830 W5831)))) (let W5833 (shen.record-macro V5829 (fn V5829)) V5829))))
+
+(defun shen.process-let (V5834) (if (and (cons? V5834) (and (= let (hd V5834)) (and (cons? (tl V5834)) (and (cons? (tl (tl V5834))) (and (cons? (tl (tl (tl V5834)))) (cons? (tl (tl (tl (tl V5834)))))))))) (cons let (cons (hd (tl V5834)) (cons (hd (tl (tl V5834))) (cons (cons let (tl (tl (tl V5834)))) ())))) V5834))
+
+(defun shen.process-@s (V5835) (let GoTo5837 (freeze V5835) (if (cons? V5835) (let Select5844 (tl V5835) (if (= @s (hd V5835)) (if (cons? Select5844) (let Select5842 (hd Select5844) (let Select5843 (tl Select5844) (if (cons? Select5843) (let Select5841 (tl Select5843) (if (cons? Select5841) (cons @s (cons Select5842 (cons (shen.process-@s (cons @s Select5843)) ()))) (if (and (= () Select5841) (string? Select5842)) (let W5836 (explode Select5842) (if (> (length W5836) 1) (shen.process-@s (cons @s (append W5836 Select5843))) V5835)) (thaw GoTo5837)))) (thaw GoTo5837)))) (thaw GoTo5837)) (thaw GoTo5837))) (thaw GoTo5837))))
+
+(defun shen.process-datatype (V5845 V5846) (let W5847 (shen.intern-type V5845) (let W5848 (compile (lambda Z5849 (shen.<datatype> Z5849)) (cons W5847 V5846)) W5847)))
+
+(defun shen.intern-type (V5850) (intern (cn (str V5850) "#type")))
+
+(defun shen.process-synonyms (V5851) (shen.synonyms-h (set shen.*synonyms* (append V5851 (value shen.*synonyms*)))))
+
+(defun shen.synonyms-h (V5852) (let W5853 (map (lambda Z5854 (shen.curry-type Z5854)) V5852) (let W5855 (eval (cons define (cons shen.demod (shen.compile-synonyms W5853)))) synonyms)))
+
+(defun shen.compile-synonyms (V5858) (if (= () V5858) (let W5859 (gensym X) (cons W5859 (cons -> (cons W5859 ())))) (if (and (cons? V5858) (cons? (tl V5858))) (cons (shen.rcons_form (hd V5858)) (cons -> (cons (shen.rcons_form (hd (tl V5858))) (shen.compile-synonyms (tl (tl V5858)))))) (simple-error "synonyms requires an even number of arguments
+"))))
+
+(defun shen.process-lambda (V5860) (let GoTo5861 (freeze V5860) (if (cons? V5860) (let Select5868 (tl V5860) (if (= /. (hd V5860)) (if (cons? Select5868) (let Select5866 (hd Select5868) (let Select5867 (tl Select5868) (if (cons? Select5867) (let Select5865 (tl Select5867) (if (cons? Select5865) (cons lambda (cons Select5866 (cons (shen.process-lambda (cons /. Select5867)) ()))) (if (= () Select5865) (if (variable? Select5866) (cons lambda Select5868) (simple-error (shen.app Select5866 " is not a variable
+" shen.s))) (thaw GoTo5861)))) (thaw GoTo5861)))) (thaw GoTo5861)) (thaw GoTo5861))) (thaw GoTo5861))))
+
+(defun shen.process-cases (V5871) (let GoTo5872 (freeze V5871) (if (cons? V5871) (let Select5880 (tl V5871) (if (= cases (hd V5871)) (if (cons? Select5880) (let Select5878 (hd Select5880) (let Select5879 (tl Select5880) (if (and (= true Select5878) (cons? Select5879)) (hd Select5879) (let GoTo5875 (freeze (if (= () Select5879) (simple-error "error: odd number of case elements
+") (thaw GoTo5872))) (if (cons? Select5879) (let Select5876 (hd Select5879) (let Select5877 (tl Select5879) (if (= () Select5877) (cons if (cons Select5878 (cons Select5876 (cons (cons simple-error (cons "error: cases exhausted" ())) ())))) (cons if (cons Select5878 (cons Select5876 (cons (shen.process-cases (cons cases Select5877)) ()))))))) (thaw GoTo5875)))))) (thaw GoTo5872)) (thaw GoTo5872))) (thaw GoTo5872))))
+
+(defun shen.process-time (V5881) (cons let (cons Start (cons (cons get-time (cons run ())) (cons Result (cons V5881 (cons Finish (cons (cons get-time (cons run ())) (cons Time (cons (cons - (cons Finish (cons Start ()))) (cons Message (cons (cons pr (cons (cons cn (cons "
+run time: " (cons (cons cn (cons (cons str (cons Time ())) (cons " secs
+" ()))) ()))) (cons (cons stoutput ()) ()))) (cons Result ())))))))))))))
+
+(defun shen.process-assoc (V5882) (if (and (cons? V5882) (and (cons? (tl V5882)) (and (cons? (tl (tl V5882))) (cons? (tl (tl (tl V5882))))))) (cons (hd V5882) (cons (hd (tl V5882)) (cons (cons (hd V5882) (tl (tl V5882))) ()))) V5882))
+
+(defun shen.make-uppercase (V5883) (intern (shen.mu-h (str V5883))))
+
+(defun shen.mu-h (V5884) (if (= "" V5884) "" (if (shen.+string? V5884) (let W5885 (string->n (hdstr V5884)) (let W5886 (- W5885 32) (let W5887 (if (and (>= W5885 97) (<= W5885 122)) (n->string W5886) (hdstr V5884)) (@s W5887 (shen.mu-h (tlstr V5884)))))) (simple-error "partial function shen.mu-h"))))
+
+(defun shen.record-macro (V5888 V5889) (set *macros* (shen.update-assoc V5888 V5889 (value *macros*))))
+
+(defun shen.update-assoc (V5899 V5900 V5901) (if (= () V5901) (cons (cons V5899 V5900) ()) (let GoTo5902 (freeze (simple-error "implementation error in shen.update-assoc")) (if (cons? V5901) (let Select5903 (hd V5901) (let Select5904 (tl V5901) (if (and (cons? Select5903) (= V5899 (hd Select5903))) (cons (cons (hd Select5903) V5900) Select5904) (cons Select5903 (shen.update-assoc V5899 V5900 Select5904))))) (thaw GoTo5902)))))
+
+(defun shen.process-read-byte () (if (shen.char-stinput? (stinput)) (cons string->n (cons (cons shen.read-unit-string (cons (cons stinput ()) ())) ())) (cons read-byte (cons (cons stinput ()) ()))))
+
+(defun shen.call-prolog (V5905) (let W5906 (cons shen.prolog-vector ()) (let W5907 (cons @v (cons true (cons 0 (cons (cons vector (cons 0 ())) ())))) (let W5908 0 (let W5909 (cons freeze (cons true ())) (let W5910 (compile (lambda Z5911 (shen.<body> Z5911)) V5905) (let W5912 (shen.received V5905) (let W5913 (gensym V) (let W5914 (gensym L) (let W5915 (gensym K) (let W5916 (gensym C) (let W5917 (cons lambda (cons W5913 (cons (cons lambda (cons W5914 (cons (cons lambda (cons W5915 (cons (cons lambda (cons W5916 (cons (shen.continue W5912 W5910 W5913 W5914 W5915 W5916) ()))) ()))) ()))) ()))) (cons W5917 (cons W5906 (cons W5907 (cons W5908 (cons W5909 ())))))))))))))))))
+
+(defun shen.received (V5920) (let GoTo5921 (freeze ()) (if (cons? V5920) (let Select5922 (hd V5920) (let Select5923 (tl V5920) (if (and (= receive Select5922) (and (cons? Select5923) (= () (tl Select5923)))) Select5923 (union (shen.received Select5922) (shen.received Select5923))))) (thaw GoTo5921))))
+
+(defun shen.prolog-vector () (let W5924 (absvector (value shen.*prolog-memory*)) (let W5925 (address-> W5924 0 shen.print-prolog-vector) (let W5926 (address-> W5924 1 2) W5926))))
+
+(defun receive (V5927) V5927)
+
+(defun shen.rcons_form (V5928) (if (cons? V5928) (cons cons (cons (shen.rcons_form (hd V5928)) (cons (shen.rcons_form (tl V5928)) ()))) V5928))
+
+(defun shen.tuple-up (V5929) (if (cons? V5929) (cons @p (cons (hd V5929) (cons (shen.tuple-up (tl V5929)) ()))) V5929))
+
+(defun undefmacro (V5930) (do (set *macros* (remove (assoc V5930 (value *macros*)) (value *macros*))) V5930))
+

@@ -1,0 +1,203 @@
+============================== Prover9 ===============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 8816 was started by User on LAPTOP-03,
+Thu Feb 24 09:49:46 2022
+The command was "/cygdrive/c/Program Files (x86)/Prover9-Mace4/bin-win32/prover9 -f C:\Users\User\Google Drive\Shen Professional\Shen\LogicLab\LKL/Prover9.in".
+============================== end of head ===========================
+
+============================== INPUT =================================
+
+% Reading from file C:\Users\User\Google Drive\Shen Professional\Shen\LogicLab\LKL/Prover9.in
+
+if(Prover9).
+% Conditional input included.
+assign(max_seconds,10).
+end_if.
+
+formulas(assumptions).
+true != false.
+(all x (0 <= x) = true).
+(all x (0 != x -> (x <= 0) = false)).
+(all x all y (0 != x & 0 != y -> (x <= y) = (pred(x) <= pred(y)))).
+(all x (x < x) = false).
+(all x all y (x != y -> (x < y) = (x <= y))).
+(tm0 < 0) = true.
+end_of_list.
+
+formulas(goals).
+simp(0,tm0) = 0.
+end_of_list.
+
+============================== end of input ==========================
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 (all x (0 <= x) = true) # label(non_clause).  [assumption].
+2 (all x (0 != x -> (x <= 0) = false)) # label(non_clause).  [assumption].
+3 (all x all y (0 != x & 0 != y -> (x <= y) = (pred(x) <= pred(y)))) # label(non_clause).  [assumption].
+4 (all x (x < x) = false) # label(non_clause).  [assumption].
+5 (all x all y (x != y -> (x < y) = (x <= y))) # label(non_clause).  [assumption].
+6 simp(0,tm0) = 0 # label(non_clause) # label(goal).  [goal].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+true != false.  [assumption].
+(0 <= x) = true.  [clausify(1)].
+0 = x | (x <= 0) = false.  [clausify(2)].
+0 = x | y = 0 | (pred(x) <= pred(y)) = (x <= y).  [clausify(3)].
+(x < x) = false.  [clausify(4)].
+x = y | (y <= x) = (y < x).  [clausify(5)].
+(tm0 < 0) = true.  [assumption].
+simp(0,tm0) != 0.  [deny(6)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+No predicates eliminated.
+
+============================== end predicate elimination =============
+
+Auto_denials:  (non-Horn, no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ = ]).
+Function symbol precedence:  function_order([ 0, false, true, tm0, <=, <, simp, pred ]).
+After inverse_order:  (no changes).
+Unfolding symbols: true/0.
+
+Auto_inference settings:
+  % set(paramodulation).  % (positive equality literals)
+  % set(binary_resolution).  % (non-Horn)
+  % set(neg_ur_resolution).  % (non-Horn, less than 100 clauses)
+
+Auto_process settings:
+  % set(factor).  % (non-Horn)
+  % set(unit_deletion).  % (non-Horn)
+
+============================== end of process initial clauses ========
+
+============================== CLAUSES FOR SEARCH ====================
+
+% Clauses after input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+9 0 = x | (x <= 0) = false.  [clausify(2)].
+11 0 = x | 0 = y | (pred(x) <= pred(y)) = (x <= y).  [copy(10),flip(b)].
+12 (x < x) = false.  [clausify(4)].
+14 x = y | (y < x) = (y <= x).  [copy(13),flip(b)].
+16 true = (tm0 < 0).  [copy(15),flip(a)].
+17 simp(0,tm0) != 0.  [deny(6)].
+18 0 = x | (pred(x) <= pred(x)) = (x <= x).  [factor(11,a,b)].
+19 (0 <= x) = (tm0 < 0).  [back_rewrite(8),rewrite([16(3)])].
+20 (tm0 < 0) != false.  [back_rewrite(7),rewrite([16(1)])].
+end_of_list.
+
+formulas(demodulators).
+12 (x < x) = false.  [clausify(4)].
+16 true = (tm0 < 0).  [copy(15),flip(a)].
+19 (0 <= x) = (tm0 < 0).  [back_rewrite(8),rewrite([16(3)])].
+        % (lex-dep)
+end_of_list.
+
+============================== end of clauses for search =============
+
+============================== SEARCH ================================
+
+% Starting search at 0.01 seconds.
+
+given #1 (I,wt=8): 9 0 = x | (x <= 0) = false.  [clausify(2)].
+
+given #2 (I,wt=15): 11 0 = x | 0 = y | (pred(x) <= pred(y)) = (x <= y).  [copy(10),flip(b)].
+
+given #3 (I,wt=5): 12 (x < x) = false.  [clausify(4)].
+
+given #4 (I,wt=10): 14 x = y | (y < x) = (y <= x).  [copy(13),flip(b)].
+
+given #5 (I,wt=5): 16 true = (tm0 < 0).  [copy(15),flip(a)].
+
+given #6 (I,wt=5): 17 simp(0,tm0) != 0.  [deny(6)].
+
+given #7 (I,wt=12): 18 0 = x | (pred(x) <= pred(x)) = (x <= x).  [factor(11,a,b)].
+
+given #8 (I,wt=7): 19 (0 <= x) = (tm0 < 0).  [back_rewrite(8),rewrite([16(3)])].
+
+given #9 (I,wt=5): 20 (tm0 < 0) != false.  [back_rewrite(7),rewrite([16(1)])].
+
+given #10 (A,wt=25): 21 0 = x | 0 = y | pred(x) = 0 | pred(y) = 0 | (pred(pred(x)) <= pred(pred(y))) = (x <= y).  [para(11(c,1),11(c,2)),flip(c),flip(d)].
+
+given #11 (F,wt=5): 30 (0 <= x) != false.  [para(19(a,2),20(a,1))].
+
+given #12 (T,wt=7): 28 (0 <= x) = (0 <= y).  [para(19(a,2),19(a,2))].
+
+given #13 (T,wt=8): 23 0 = x | (x < 0) = false.  [para(9(b,1),14(b,2)),merge(b)].
+-------- Proof 1 -------- 
+
+============================== PROOF =================================
+
+% Proof 1 at 0.01 (+ 0.00) seconds.
+% Length of proof is 14.
+% Level of proof is 5.
+% Maximum clause weight is 10.
+% Given clauses 13.
+
+2 (all x (0 != x -> (x <= 0) = false)) # label(non_clause).  [assumption].
+4 (all x (x < x) = false) # label(non_clause).  [assumption].
+5 (all x all y (x != y -> (x < y) = (x <= y))) # label(non_clause).  [assumption].
+7 true != false.  [assumption].
+9 0 = x | (x <= 0) = false.  [clausify(2)].
+12 (x < x) = false.  [clausify(4)].
+13 x = y | (y <= x) = (y < x).  [clausify(5)].
+14 x = y | (y < x) = (y <= x).  [copy(13),flip(b)].
+15 (tm0 < 0) = true.  [assumption].
+16 true = (tm0 < 0).  [copy(15),flip(a)].
+20 (tm0 < 0) != false.  [back_rewrite(7),rewrite([16(1)])].
+23 0 = x | (x < 0) = false.  [para(9(b,1),14(b,2)),merge(b)].
+43 tm0 = 0.  [resolve(23,b,20,a),flip(a)].
+45 $F.  [back_rewrite(20),rewrite([43(1),12(3)]),xx(a)].
+
+============================== end of proof ==========================
+
+============================== STATISTICS ============================
+
+Given=13. Generated=97. Kept=35. proofs=1.
+Usable=12. Sos=14. Demods=4. Limbo=2, Disabled=15. Hints=0.
+Weight_deleted=0. Literals_deleted=0.
+Forward_subsumed=61. Back_subsumed=3.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=5 (1 lex), Back_demodulated=4. Back_unit_deleted=0.
+Demod_attempts=1464. Demod_rewrites=18.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=167. Nonunit_bsub_feature_tests=67.
+Megabytes=0.06.
+User_CPU=0.01, System_CPU=0.00, Wall_clock=1.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+THEOREM PROVED
+
+THEOREM PROVED
+
+Exiting with 1 proof.
+
+------ process 8816 exit (max_proofs) ------
+
+Process 8816 exit (max_proofs) Thu Feb 24 09:49:47 2022
+
+

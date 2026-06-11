@@ -1,0 +1,61 @@
+all x(append(nil,x) = x).
+all x(all y(all z(append(cons(x,y),z) = cons(x,append(y,z))))).
+all x(all y((((- (nil = x)) & all xn(all yn((- (x = cons(xn,yn)))))) -> append(x,y) = abort))).
+reverse(nil) = nil.
+all x(all y(reverse(cons(y,x)) = append(reverse(x),cons(y,nil)))).
+all x((((- (nil = x)) & all xn(all yn((- (x = cons(xn,yn)))))) -> reverse(x) = abort)).
+all x(assoc(x,nil) = nil).
+all x(all y(all z(assoc(y,cons(cons(y,z),x)) = cons(y,z)))).
+all x(all y(all z((all xn(all yn((- (x = cons(xn,yn))))) -> assoc(y,cons(x,z)) = assoc(y,z))))).
+all x(all y(all z(((- (y = hd(x))) -> assoc(y,cons(x,z)) = assoc(y,z))))).
+all x(all y((((- (nil = y)) & all xn(all yn((- (y = cons(xn,yn)))))) -> assoc(x,y) = abort))).
+boolean?(true) = true.
+boolean?(false) = true.
+all x((((- (true = x)) & (- (false = x))) -> boolean?(x) = false)).
+all x(difference(nil,x) = nil).
+all x(all y(all z((element?(x,z) = true -> difference(cons(x,y),z) = difference(y,z))))).
+all x(all y(all z((element?(x,z) = false -> difference(cons(x,y),z) = cons(x,difference(y,z)))))).
+all x(all y((((- (nil = x)) & all xn(all yn((- (x = cons(xn,yn)))))) -> difference(x,y) = abort))).
+all x(all y(do(x,y) = y)).
+all x(element?(x,nil) = false).
+all x(all y(element?(x,cons(x,y)) = true)).
+all x(all y(all z(((- (y = x)) -> element?(y,cons(x,z)) = element?(y,z))))).
+all x(all y((((- (nil = y)) & all xn(all yn((- (y = cons(xn,yn)))))) -> element?(x,y) = abort))).
+empty?(nil) = true.
+all x(((- (nil = x)) -> empty?(x) = false)).
+all x(all y(fix(x,y) = fix-help(x,y,x(y)))).
+all x(all y(fix-help(x,y,y) = y)).
+all x(all y(all z(((- (x = z)) -> fix-help(y,x,z) = fix-help(y,z,y(z)))))).
+sum(nil) = 0.
+all x(all y(sum(cons(x,y)) = add(x,sum(y)))).
+all x((((- (nil = x)) & all xn(all yn((- (x = cons(xn,yn)))))) -> sum(x) = abort)).
+all x(all y(head(cons(y,x)) = y)).
+all x((all xn(all yn((- (x = cons(xn,yn))))) -> head(x) = abort)).
+all x(all y(tail(cons(x,y)) = y)).
+all x((all xn(all yn((- (x = cons(xn,yn))))) -> tail(x) = abort)).
+all x(intersection(nil,x) = nil).
+all x(all y(all z((element?(x,z) = true -> intersection(cons(x,y),z) = cons(x,intersection(y,z)))))).
+all x(all y(all z((element?(x,z) = false -> intersection(cons(x,y),z) = intersection(y,z))))).
+all x(all y((((- (nil = x)) & all xn(all yn((- (x = cons(xn,yn)))))) -> intersection(x,y) = abort))).
+all x(union(nil,x) = x).
+all x(all y(all z((element?(x,z) = true -> union(cons(x,y),z) = union(y,z))))).
+all x(all y(all z((element?(x,z) = false -> union(cons(x,y),z) = cons(x,union(y,z)))))).
+all x(all y((((- (nil = x)) & all xn(all yn((- (x = cons(xn,yn)))))) -> union(x,y) = abort))).
+all x(all y(subst(y,x,x) = y)).
+all x(all y(all z(all x1(((- (z = cons(x,x1))) -> subst(y,z,cons(x,x1)) = cons(subst(y,z,x),subst(y,z,x1))))))).
+all x(all y(all z((((- (y = z)) & all xn(all yn((- (z = cons(xn,yn)))))) -> subst(x,y,z) = z)))).
+all x(all y(map(x,y) = map-h(x,y,nil))).
+all x(all y(map-h(x,nil,y) = reverse(y))).
+all x(all y(all z(all x1(map-h(y,cons(z,x),x1) = map-h(y,x,cons(y(z),x1)))))).
+all x(all y(all z((((- (nil = y)) & all xn(all yn((- (y = cons(xn,yn)))))) -> map-h(x,y,z) = abort)))).
+all x(length(x) = length-h(x,0)).
+all x(length-h(nil,x) = x).
+all x(all y(((- (nil = x)) -> length-h(x,y) = length-h(tl(x),add(y,1))))).
+all x(occurrences(x,x) = 1).
+all x(all y(all z(((- (y = cons(x,z))) -> occurrences(y,cons(x,z)) = add(occurrences(y,x),occurrences(y,z)))))).
+all x(all y((((- (x = y)) & all xn(all yn((- (y = cons(xn,yn)))))) -> occurrences(x,y) = 0))).
+all x(add(0,x) = x).
+all x(all y(((- (0 = x)) -> add(x,y) = succ(add(pred(x),y))))).
+all x(all y(nth(1,cons(y,x)) = y)).
+all x(all y(all z(((- (1 = y)) -> nth(y,cons(x,z)) = nth(-(y,1),z))))).
+all x(all y((all xn(all yn((- (y = cons(xn,yn))))) -> nth(x,y) = abort))).
