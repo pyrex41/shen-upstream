@@ -1,0 +1,5 @@
+(tc -)
+(cd "C:/Users/drmta/OneDrive/Desktop/Shen/THORN")
+(load "THORN 20.shen")
+(load "datatypes.shen")
+(load "planner.shen")

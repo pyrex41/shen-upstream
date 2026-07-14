@@ -1,4 +1,4 @@
-(package encrypt [e-> <-e ignore populate created random mapc tokenise whitespace? url]
+(package encrypt [e-> <-e ignore created random mapc tokenise whitespace? url for to]
 
 (define load-and-decrypt-from-web
   URL TC? -> (shen.load-help TC? (read-and-decrypt-from-web URL)))
@@ -59,7 +59,8 @@
                
 (define key
   File -> (let Bytes       (read-file-as-bytelist File)
-               Encrypt     (populate (/. E []) [256])
+               Vector      (vector 256)
+               Encrypt     (for X = 1 to 256 (vector-> V X []))
                FillEncrypt (set *encrypt* (fill-encrypt-vector Bytes Encrypt 1))
                Decrypt     (vector (length Bytes))
                FillDecrypt (set *decrypt* (fill-decrypt-vector Decrypt FillEncrypt 1))

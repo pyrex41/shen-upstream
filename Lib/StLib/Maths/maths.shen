@@ -534,5 +534,9 @@
   Zero Tolerance -> 0       where (<= (abs Zero) Tolerance) 
   N Tolerance -> (+ 1 (log10+ (/ N 10) Tolerance))   where (>= N 10)
   N Tolerance -> (* 0.1 (log10+ (power N 10) (* 10 Tolerance))))
-        
-      )      
+  
+(define upto
+  {A --> (A --> boolean) --> (A --> A) 
+    --> (B --> C --> C) --> C --> (A --> B) --> C}
+  N Stop? _ _ End _ -> End  where (Stop? N)
+  N Stop? Step Constructor End F -> (Constructor (F N) (upto (Step N) Stop? Step Constructor End F)))      )      

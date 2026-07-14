@@ -57,7 +57,7 @@ typechecking (fn " (shen.app (shen.deref V4472 V4473) ")
 
 (defun shen.freshterm (V4825) (let W4826 (absvector 3) (let W4827 (address-> W4826 0 shen.print-freshterm) (let W4828 (address-> W4827 1 V4825) (let W4829 (address-> W4828 2 (set shen.*gensym* (+ 1 (value shen.*gensym*)))) W4829)))))
 
-(defun shen.print-freshterm (V4830) (cn "&&" (str (<-address V4830 1))))
+(defun shen.print-freshterm (V4830) (cn "&&" (shen.app (<-address V4830 1) "" shen.a)))
 
 (defun shen.search-user-datatypes (V4831 V4832 V4833 V4834 V4835 V4836 V4837) (let W4838 (if (shen.unlocked? V4835) (let W4839 (shen.lazyderef V4833 V4834) (if (cons? W4839) (let W4840 (shen.lazyderef (hd W4839) V4834) (if (cons? W4840) (let W4841 (tl W4840) (do (shen.incinfs) (call (((shen.deref W4841 V4834) (shen.deref V4831 V4834)) (shen.deref V4832 V4834)) V4834 V4835 V4836 V4837))) false)) false)) false) (if (= W4838 false) (if (shen.unlocked? V4835) (let W4842 (shen.lazyderef V4833 V4834) (if (cons? W4842) (let W4843 (tl W4842) (do (shen.incinfs) (shen.search-user-datatypes V4831 V4832 W4843 V4834 V4835 V4836 V4837))) false)) false) W4838)))
 

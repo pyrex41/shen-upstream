@@ -1,7 +1,0 @@
-all x(all y((<(y,x) = true -> simp(x,y) = simp(x,succ(y))))).
-all x(all y((<(y,x) = false -> simp(x,y) = y))).
-all x(<(x,x) = false).
-all x(all y(((- (x = y)) -> <(x,y) = <=(x,y)))).
-all x(<=(0,x) = true).
-all x(((- (0 = x)) -> <=(x,0) = false)).
-all x(all y((((- (0 = x)) & (- (0 = y))) -> <=(x,y) = <=(pred(x),pred(y))))).

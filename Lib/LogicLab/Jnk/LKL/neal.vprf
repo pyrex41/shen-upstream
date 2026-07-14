@@ -1,1 +1,0 @@
-(@p [] [all want [all have [[[< have want] = true] => [[simp want have] = want]]]])[(fn mathind)(allr tm0)(fn =>r)(semantics <)(semantics <=)(lemma [~ [true = false]])(fn b1)(fn prover9)(allr tm0)(fn =>r)]["(fn mathind)""(allr tm0)""(fn =>r)""(semantics <)""(semantics <=)""(lemma [~ [true = false]])""(fn b1)""(fn prover9)""(allr tm0)""(fn =>r)"]

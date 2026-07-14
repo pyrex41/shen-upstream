@@ -1,12 +1,0 @@
-if(Prover9). 
-                                      assign(max_seconds, 10).
-                                     end_if.formulas(assumptions).(- (true = false)).
-all x(<=(0,x) = true).
-all x(((- (0 = x)) -> <=(x,0) = false)).
-all x(all y((((- (0 = x)) & (- (0 = y))) -> <=(x,y) = <=(pred(x),pred(y))))).
-all x(<(x,x) = false).
-all x(all y(((- (x = y)) -> <(x,y) = <=(x,y)))).
-<(tm0,0) = true.
-end_of_list.formulas(goals).simp(0,tm0) = 0.
-end_of_list.
-
