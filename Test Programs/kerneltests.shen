@@ -1,5 +1,28 @@
 (maxinferences 1e7)
-                        
+
+\\ S42 public lambda-table and type-variancy regressions.  These exercise
+\\ fn/lambdatable and variancy, rather than private implementation helpers.
+(report "lambda table updates"
+  (update-lambda-table append 2)
+  (let F append Lambda (fn F) (Lambda [1] [2]))
+  [1 2]
+  (put version shen.lambda-form stale)
+  (update-lambda-table version 0)
+  (trap-error (fn version) (/. X undefined))
+  undefined
+  (do (put lambda-table-missing shen.lambda-form stale)
+      (update-lambda-table lambda-table-missing -1)
+      (trap-error (fn lambda-table-missing) (/. X undefined)))
+  undefined)
+
+(report "type declaration variancy"
+  (prolog? (variancy (receive append)
+                     (receive [[list A] --> [[list A] --> [list A]]])))
+  true
+  (prolog? (variancy (receive append)
+                     (receive [number --> number])))
+  true)
+
 (report "cartesian product"
 
     (load "cartprod.shen") loaded

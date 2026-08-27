@@ -43,6 +43,16 @@ their kernel source of truth rather than the raw zip URL.
 
 ## Lineage note
 
+### S42 certification errata
+
+The initial ShenOSKernel-42 certification script included four assertions
+that do not describe the canonical S42 S-series kernel: one expected
+`update-lambda-table` to delete a `shen.lambda-form` property, and three
+called the private `shen.variancy-signature` helper (which S42 does not
+export).  S42's public `fn`/lambdatable and `variancy` behavior is intentional
+and is covered by the regression cases in `Test Programs/kerneltests.shen`.
+The pristine import and its KLambda sources remain byte-for-byte unchanged.
+
 Tarver's S-series distributions (this repo) and the community
 **ShenOSKernel** releases (github.com/Shen-Language/shen-sources, e.g.
 `shen-41.2`) are **different lineages** that share a version numbering
