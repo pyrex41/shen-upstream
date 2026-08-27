@@ -1,0 +1,6 @@
+(defun simp (V22768 V22769) (cond ((< V22769 V22768) (simp V22768 (succ V22769))) (true V22769)))
+
+(defun < (V22771 V22772) (cond ((= V22771 V22772) false) (true (<= V22771 V22772))))
+
+(defun <= (V22777 V22778) (cond ((= 0 V22777) true) ((= 0 V22778) false) (true (<= (pred V22777) (pred V22778)))))
+

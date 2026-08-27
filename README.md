@@ -11,6 +11,7 @@ filename for in-place updates, so a URL alone never identifies content.
 
 | import | tag | source | sha256 |
 |---|---|---|---|
+| **S42.0 (2026-08-25 release)** — current | `s42-pristine-20260825` | [S42.zip](https://www.shenlanguage.org/Download/S42.zip) | `30abdc7e…4dfb23` |
 | **S41.2 (2026-07-11 refresh)** — current | `s41.2-pristine-20260711` | [S41.2.zip](https://www.shenlanguage.org/Download/S41.2.zip) | `51becbfd…3ee836` |
 | S41.1 | `s41.1-pristine` | S41.1.zip | `1f35106a…1ec3cc` |
 
@@ -22,7 +23,7 @@ are in [`PROVENANCE.md`](PROVENANCE.md).
 
 ## What's in the distribution
 
-The repo root is the `S41/` "home directory" from the zip:
+The repo root is the `S42/` "home directory" from the zip:
 
 - `KLambda/` — the kernel as 15 KLambda files, including `backend.kl`
   (the Kλ→Common Lisp compiler, in-kernel since S41.1)

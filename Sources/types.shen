@@ -12,6 +12,9 @@
               F))
   
 (defprolog variancy
+  F [--> A] <-- (when (= (arity F) 0)) !
+                (system-S-h [fn F] B [])
+                (variants? F A B);
   F Rectify <-- (system-S-h [fn F] A [])
                 (variants? F A Rectify);)
           
