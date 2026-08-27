@@ -9,6 +9,14 @@ their kernel source of truth rather than the raw zip URL.
 
 ## Imports (newest first)
 
+### S42.0 — 2026-08-25 release (tag `s42-pristine-20260825`)
+
+- **Source:** <https://www.shenlanguage.org/Download/S42.zip>
+- **SHA-256 of zip:** `30abdc7e5a1e27b7a20109c1ed141e4712885e31f24d9710d16415fbbd4dfb23`
+- **Retrieved:** 2026-08-27
+- **Contents:** exact `S42/` directory from the official archive; no source
+  files were modified.
+
 ### S41.2 — 2026-07-11 refresh (tag `s41.2-pristine-20260711`)
 
 - **Source:** <https://www.shenlanguage.org/Download/S41.2.zip>
@@ -47,7 +55,7 @@ additions. At the defun level the shared kernel differs in ~156 of 672
 functions (measured 2026-07-14 against ShenOSKernel-41.2). Do not mix
 files across lineages without noting it.
 
-The repository root corresponds to the `S41/` directory inside the zip —
+The repository root corresponds to the `S42/` directory inside the zip —
 the "home directory" referenced by the official install instructions
 (`(load "install.lsp")` from an SBCL REPL started here).
 

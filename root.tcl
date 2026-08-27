@@ -1,7 +1,7 @@
 # TCL event loop
 
-set in {C:/Users/drmta/Desktop/Shen/S41/shen-to-tcl.txt}
-set out {C:/Users/drmta/Desktop/Shen/S41/tcl-to-shen.txt}
+set in {C:/Users/drmta/Desktop/Shen/S42/shen-to-tcl.txt}
+set out {C:/Users/drmta/Desktop/Shen/S42/tcl-to-shen.txt}
 set myloop 1
 
 proc eventloop {File} {

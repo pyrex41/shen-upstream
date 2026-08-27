@@ -8,7 +8,7 @@
   {--> string}
   -> (do (output "Enter the absolute path of the directory in you wish the Shen/tk transaction files to be stored.~%~%")
          (output "This directory needs to be freely writable, enter the path as a string ending in /~%~%") 
-         (output "e.g. c#34;C:/Users/drmta/Desktop/Shen/S41/c#34; is my answer to this prompt~%~%")
+         (output "e.g. c#34;C:/Users/drmta/Desktop/Shen/S42/c#34; is my answer to this prompt~%~%")
          (output "Go ahead: ")
          (trap-error (input+ string) (/. E (transaction-directory)))))
 
